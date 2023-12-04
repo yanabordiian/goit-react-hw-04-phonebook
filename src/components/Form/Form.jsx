@@ -1,38 +1,38 @@
 import css from './Form.module.css';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const Form = ({onAddContact}) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  onFormSubmit = e => {
+ const onFormSubmit = e => {
     e.preventDefault();
 
     const newUser = {
-      name: this.state.name,
-      number: Number.parseFloat(this.state.number),
+      name: name,
+      number: Number.parseFloat(number),
     };
 
-    this.props.onAddContact(newUser);
-    this.setState({
-      name: '',
-      number: '',
-    })
+    onAddContact(newUser);
   };
 
-  onChangeInput = e => {
+  const onChangeInput = e => {
     const value = e.target.value;
     const nameInput = e.target.name;
-    this.setState({
-      [nameInput]: value,
-    });
+    switch (nameInput) {
+      case 'name':
+        setName(value);
+        return;
+      case 'number':
+        setNumber(value);
+        return;
+      default:
+        return;
+    }
   };
 
-  render() {
     return (
-      <form className={css.form} onSubmit={this.onFormSubmit}>
+      <form className={css.form} onSubmit={onFormSubmit}>
         <label className={css.labelForm}>Name</label>
         <input
           type="text"
@@ -40,8 +40,8 @@ export class Form extends Component {
           required
           placeholder="Your name"
           className={css.inputForm}
-          value={this.state.name}
-          onChange={this.onChangeInput}
+          value={name}
+          onChange={onChangeInput}
         />
         <label className={css.labelForm}>Number</label>
         <input
@@ -51,8 +51,8 @@ export class Form extends Component {
           placeholder="Your number"
           pattern="^\+?\d{1,4}[ .\-]?\(?\d{1,3}\)?[ .\-]?\d{1,4}[ .\-]?\d{1,4}[ .\-]?\d{1,9}$"
           className={css.inputForm}
-          value={this.state.number}
-          onChange={this.onChangeInput}
+          value={number}
+          onChange={onChangeInput}
         />
         <button type="submit" className={css.button}>
           Add Contact
@@ -60,4 +60,3 @@ export class Form extends Component {
       </form>
     );
   }
-}
