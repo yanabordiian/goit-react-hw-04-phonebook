@@ -60,7 +60,7 @@ export const App = () => {
       id: nanoid(),
     };
 
-    setContacts(prevState =>  [...prevState.contacts, user]);
+    setContacts(prevState =>  [...prevState, user]);
   };
 
  

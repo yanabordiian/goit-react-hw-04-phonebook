@@ -13,7 +13,9 @@ export const Form = ({onAddContact}) => {
       number: Number.parseFloat(number),
     };
 
-    onAddContact(newUser);
+   onAddContact(newUser);
+   setName('');
+   setNumber('');
   };
 
   const onChangeInput = e => {
