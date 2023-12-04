@@ -23,9 +23,11 @@ export const Form = ({onAddContact}) => {
       case 'name':
         setName(value);
         return;
+      
       case 'number':
         setNumber(value);
         return;
+      
       default:
         return;
     }
